@@ -1,12 +1,15 @@
 ﻿using System;
-public abstract class Person{
+public  class Person{
  public string Name;
  public int Age;
  public Person(string name,int age){
   Name=name;
   Age =age;
  }
- public abstract void print ();
+ 
+ public virtual  void Print(){
+      Console.WriteLine($"My name is {Name}, my age is {Age}");
+    }
 
 }
 
@@ -17,22 +20,51 @@ public class Student :  Person{
         Year=year;
         Gpa=gpa; 
     }
-    public override void print()
+    public override void Print()
     {
         Console.WriteLine($"my name is{Name},my age is {Age},and my gpa is{Gpa}");
+    }
+}
+public class Stuff :Person {
+    public int JoinYear;
+    public double Salary;
+    public Stuff(string name,int age,int joinyear,double salary ):base(name, age){
+        Salary=salary;
+        JoinYear=joinyear;
+    }
+     public override void Print()
+    {
+        Console.WriteLine($"my name is{Name},my age is {Age},and my salary is{Salary}");
     }
 }
 public class Database{
 private int _current =0;   
 public Person [] Peple =new Person [50]; 
+public void Addperson (Person person){
+  // if (_current==49) return; 
+   Peple[_current++]=person; 
+}
 public void Addstudent (Student student){
   // if (_current==49) return; 
    Peple[_current++]=student; 
 }
+public void Addstuff (Stuff stuff){
+  // if (_current==49) return; 
+   Peple[_current++]=stuff; 
+}
+public void PrintAll(){
+    for(var i = 0 ; i < _current; i++){
+        Peple[i].Print();
+    }
+  } 
 
 }
+
 public class program{
     private static void Main() {
+     Console.Write("enter numberfrom 1 to 4:");
+     var number=Convert.ToInt32( Console.ReadLine());
+     if (number==1){
      var database= new Database();
      Console.Write("name:");
      var name=Console.ReadLine();
@@ -44,6 +76,33 @@ public class program{
      var gpa=Convert.ToSingle( Console.ReadLine());
      Student student=new Student(name,age,year,gpa);
      database.Addstudent(student);
-    // Console.WriteLine("Hello, World!");
+     
+     }
+     else if(number==2){
+     var database= new Database();
+     Console.Write("name:");
+     var name=Console.ReadLine();
+      Console.Write("age:");
+     var age=Convert.ToInt32( Console.ReadLine());
+      Console.Write("joinyear:");
+     var joinyear=Convert.ToInt32( Console.ReadLine());
+      Console.Write("slasry:");
+     var salary=Convert.ToDouble( Console.ReadLine());
+     var stuff=new Stuff (name,age,joinyear,salary);
+     database.Addstuff(stuff);  
+     }
+    else if(number==3){
+     var database= new Database();
+     Console.Write("name:");
+     var name=Console.ReadLine();
+      Console.Write("age:");
+     var age=Convert.ToInt32( Console.ReadLine());
+     var person=new Person (name,age);
+     database.Addperson(person);
+    }
+    else {
+      var database= new Database();
+      database.PrintAll();  
+    }
 }
 }
