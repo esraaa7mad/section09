@@ -1,7 +1,7 @@
 ﻿using System;
-public  class Person{
- public string Name;
- public int Age;
+public class Person{
+ private string _Name;
+ private int _Age;
  public Person(string name,int age)
  {
   if(name == null || name=="" || name.Length>=32)
@@ -12,13 +12,23 @@ public  class Person{
     Console.WriteLine("invalid age");
     return;
   } 
-  Name=name;
-  Age =age;
+  _Name=name;
+  _Age =age;
+ }
+ public string Getname( ) =>_Name;
+ public int Getage() =>_Age;
+ public void Setname(string name)
+ {
+    if(name == null || name=="" || name.Length>=32)
+  {
+    throw new Exception("invalid name");
+  } 
+    _Name=name;
  }
  
  public virtual  void Print()
     {
-      Console.WriteLine($"My name is {Name}, my age is {Age}");
+      Console.WriteLine($"My name is {_Name}, my age is {_Age}");
     }
 
 }
@@ -42,7 +52,7 @@ public class Student :  Person
     }
     public override void Print()
     {
-        Console.WriteLine($"my name is{Name},my age is {Age},and my gpa is{Gpa}");
+        Console.WriteLine($"my name is{Getname()},my age is {Getage()},and my gpa is{Gpa}");
     }
 }
 public class Stuff :Person 
@@ -65,7 +75,7 @@ public class Stuff :Person
     }
      public override void Print()
     {
-        Console.WriteLine($"my name is{Name},my age is {Age},and my salary is{Salary}");
+        Console.WriteLine($"my name is{Getname()},my age is {Getage()},and my salary is{Salary}");
     }
 }
 public class Database
@@ -142,7 +152,7 @@ public class program{
      }
      catch
      {
-        Console.WriteLine("invalid input");     
+        Console.WriteLine("invalid input");      
      }
      }
     else if(number==3)
