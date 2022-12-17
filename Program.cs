@@ -69,11 +69,11 @@ public class Student :  Person
     }
     public Student(string name,int age,int year,float gpa ):base(name, age)
     {
-        if (year>1 ||year<5)
+        if (year<1 ||year>5)
         {
             throw new Exception("invalid year");
         }
-        if(gpa>0 ||gpa<4)
+        if(gpa<0 ||gpa>4)
         {
             throw new Exception("invalid gpa");
         }
@@ -114,11 +114,11 @@ public class Stuff :Person
     public Stuff(string name,int age,int joinyear,double salary ):base(name, age)
     
     {
-        if(salary>=0 || salary<120000)
+        if(salary<=0 || salary>120000)
         {
            throw new Exception("invalid salary");  
         }
-        if(joinyear!=age+21)
+        if(joinyear>age+21)
         {
              throw new Exception("invalid joinyear");
         }
